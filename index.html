@@ -11,9 +11,9 @@
             height: 100%;
             display: grid;
             place-items: center;
-            font-family: 'Arial', sans-serif;
+            font-family: "Arial", sans-serif;
             background-color: #1f2636;
-            background: url('https://media.tenor.com/9RCIDZjkhBsAAAAM/hamster-meme.gif') no-repeat center center fixed;
+            background: url("https://i.imgur.com/YshhWL5.gif") no-repeat center center fixed;
             background-size: cover;
         }
 
@@ -173,6 +173,7 @@
                 <option value="TrainMiner">Train Miner</option>
                 <option value="BikeRide3D">Bike Ride 3D</option>
                 <option value="MergeAway">Merge Away</option>
+                <option value="TwerkRace">Twerk Race</option>
             </select>
             <label for="keyCountSelect" id="CountLabel">Choose Count of Keys:</label>
             <select id="keyCountSelect">
@@ -219,13 +220,17 @@
             MergeAway: {
                 token: "8d1cc2ad-e097-4b86-90ef-7a27e19fb833",
                 promoId: "dc128d28-c45b-411c-98ff-ac7726fbaea4"
+            },
+            TwerkRace: {
+                token: "61308365-9d16-4040-8bb0-2f4a4c69074c",
+                promoId: "61308365-9d16-4040-8bb0-2f4a4c69074c"
             }
         };
 
         let currentConfig = configs.MyCloneArmy;
         let keygenActive = false;
 
-        document.addEventListener('DOMContentLoaded', () => {
+        document.addEventListener("DOMContentLoaded", () => {
             document.getElementById("gameSelect").addEventListener("change",(e)=>{
                 currentConfig=configs[e.target.value];
             });
@@ -284,10 +289,10 @@
                     return null;
                 }
             
-                for (let i=0;i<7;i++) {
+                for (let i=0;i<15;i++) {
                     await delay(DELAY_MS*randomMultiplier());
                     const hasKey = await checkProgress(token);
-                    updateProgress(10/keyCount);
+                    updateProgress(6/keyCount);
                     if (hasKey) break;
                 }
             
@@ -378,7 +383,7 @@
                 try {
                     return crypto.randomUUID();
                 } catch {
-                    console.warn('Fallback for crypto.randomUUID()');
+                    console.warn("Fallback for crypto.randomUUID()");
                 }
             }
     
@@ -428,7 +433,7 @@
             });
             const result = await res.json();
             if (!res.ok) {
-                throw new Error(result.error_message||"Key generation failed");
+                throw new Error(result.error_message||"Key fetch failed");
             }
             return result.promoCode;
         }
